@@ -5,13 +5,8 @@ require("dotenv").config();
 
 const app = express();
 
-// CORS Middleware - السماح لجميع الروابط
-app.use(cors({
-  origin: "*", // السماح لجميع النطاقات
-  credentials: false, // إذا كنت لا تستخدم cookies أو authentication يمكن تركه false
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
-}));
+// CORS Middleware - الإصلاح هنا
+app.use(cors());
 
 app.use(express.json());
 
@@ -25,9 +20,9 @@ app.use("/api/results", require("./routes/results"));
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("MongoDB connected successfully");
+    console.log("connected");
   } catch (error) {
-    console.log("MongoDB connection error:", error);
+    console.log(error);
   }
 };
 connectDB();
