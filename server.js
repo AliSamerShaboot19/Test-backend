@@ -19,7 +19,11 @@ app.use("/api/results", require("./routes/results"));
 // MongoDB connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI,{
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000,
+    });
     console.log("connected");
   } catch (error) {
     console.log(error);
@@ -31,3 +35,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
